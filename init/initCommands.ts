@@ -13,6 +13,7 @@ const initCommands = async (bot: Client) => {
   );
 
   for (const commandFile of commandFiles) {
+    console.log(commandFile);
     const command: { default?: NineCommand } = await import(commandFile);
 
     if (!command.default) {
@@ -53,7 +54,7 @@ const initCommands = async (bot: Client) => {
     if (!commandName) return;
 
     for (const command of cmds) {
-      if (command.name !== commandName) continue;
+      if (!message.content.startsWith(`${prefix}${command.name}`)) continue;
       if (command.onlyMia && message.author.id !== MIA_ID)
         return message.reply("only Mia is allowed to run this command!");
 
