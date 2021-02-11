@@ -1,12 +1,14 @@
 import { makeNineCommand } from "../../helpers/makeNine";
+import tag from "../../helpers/tag";
 
 export default makeNineCommand({
   name: "yolo",
   onlyMia: true,
   prefixed: true,
-  async run(message) {
+  async run() {
+    return;
     // console.log("fetching the users");
-    // return (await message.guild!.members.fetch()).array().forEach((member) => {
+    // return await message.guild!.members.cache.array().forEach((member) => {
     //   try {
     //     console.log("owo", tag(member.user));
     //   } catch (e) {

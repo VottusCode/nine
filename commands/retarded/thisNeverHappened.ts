@@ -5,10 +5,19 @@ export default makeNineCommand({
   name: "this never happened",
   onlyMia: true,
   prefixed: false,
-  async run(message) {
-    if (!(message.channel instanceof TextChannel)) return;
+  async run(message, [amount]) {
+    // if (!(message.channel instanceof TextChannel)) return;
+    if (message.channel.type === "dm") return;
 
-    await message.channel.bulkDelete(6);
-    return await message.reply("this bot's code was never fucked up");
+    const toRemove = Number(amount) + 1;
+
+    if (toRemove >= 100)
+      return await (
+        await message.reply("the amount must be less than 100!")
+      ).delete({
+        timeout: 1000,
+      });
+
+    await message.channel.bulkDelete(toRemove);
   },
 });
