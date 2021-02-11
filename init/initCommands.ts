@@ -50,15 +50,12 @@ const initCommands = async (bot: Client) => {
 
     const args = message.content.slice(prefix.length).trim().split(" ");
 
-    const commandName = args.shift()?.toLowerCase();
-    if (!commandName) return;
-
     for (const command of cmds) {
       if (!message.content.startsWith(`${prefix}${command.name}`)) continue;
       if (command.onlyMia && message.author.id !== MIA_ID)
         return message.reply("only Mia is allowed to run this command!");
 
-      return await command.run(message);
+      return await command.run(message, args);
     }
   });
 };

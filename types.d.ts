@@ -1,11 +1,11 @@
-import { ClientEvents } from "discord.js";
+import { ClientEvents, Message } from "discord.js";
 export type NineCommandPrefix = "MIA" | "NINE";
 
 export interface NineCommand {
   name: string;
   prefixed?: boolean | NineCommandPrefix;
   onlyMia?: boolean;
-  run: (...args: ClientEvents["message"]) => Promise<unknown>;
+  run: (message: Message, arguments: string[]) => Promise<unknown>;
 }
 
 export interface NineEvent<E extends keyof ClientEvents> {
