@@ -7,9 +7,10 @@ export default makeNineCommand({
   onlyMia: true,
   prefixed: "MIA",
   async run(message) {
+    await message.channel.send([
+      message.content.substr(`${MIA_PREFIX}say `.length),
+      ...message.attachments.array(),
+    ]);
     await message.delete();
-    return await message.channel.send(
-      message.content.substr(`${MIA_PREFIX}say `.length)
-    );
   },
 });
